@@ -1,0 +1,15 @@
+.button {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #07140b;
+  background: #1ed760;
+  box-shadow: 0 5px 18px #1ed76033;
+  transition: transform .18s ease, background .18s ease;
+}
+.button:hover { background: #48e783; transform: scale(1.06); }
+.button:focus-visible { outline: 3px solid white; outline-offset: 3px; }

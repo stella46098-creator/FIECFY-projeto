@@ -1,0 +1,742 @@
+{
+  "info": {
+    "_postman_id": "8c5b1b77-2f1a-4c9b-a0b0-fiecfy000001",
+    "name": "FIECFY API",
+    "description": "Collection acadêmica para testar a API RESTful FIECFY. Faça login e copie o token para a variável token.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8000/api"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Cadastro",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/register",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "register"
+          ]
+        },
+        "description": "Cria usuário, dispara e-mail de boas-vindas e retorna Bearer Token.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Usuário Teste\",\n  \"email\": \"novo@exemplo.com\",\n  \"password\": \"12345678\",\n  \"password_confirmation\": \"12345678\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "login"
+          ]
+        },
+        "description": "Use o token da resposta na variável token.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"teste@fiecfy.com\",\n  \"password\": \"12345678\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Usuário autenticado",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/me",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "me"
+          ]
+        },
+        "description": ""
+      }
+    },
+    {
+      "name": "Logout",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/logout",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "logout"
+          ]
+        },
+        "description": ""
+      }
+    },
+    {
+      "name": "Listar artistas",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/artistas?search=Billie",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "artistas?search=Billie"
+          ]
+        },
+        "description": ""
+      }
+    },
+    {
+      "name": "Criar artista",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/artistas",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "artistas"
+          ]
+        },
+        "description": "",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Artista de Teste\",\n  \"monthly_listeners\": 1000\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Consultar artista",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/artistas/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "artistas",
+            "1"
+          ]
+        },
+        "description": ""
+      }
+    },
+    {
+      "name": "Atualizar artista",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/artistas/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "artistas",
+            "1"
+          ]
+        },
+        "description": "",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Artista Atualizado\",\n  \"monthly_listeners\": 2000\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Excluir artista",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/artistas/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "artistas",
+            "1"
+          ]
+        },
+        "description": ""
+      }
+    },
+    {
+      "name": "Listar álbuns",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/albums",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "albums"
+          ]
+        },
+        "description": ""
+      }
+    },
+    {
+      "name": "Consultar álbum",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/albums/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "albums",
+            "1"
+          ]
+        },
+        "description": ""
+      }
+    },
+    {
+      "name": "Listar músicas",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/musicas?search=Ocean",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "musicas?search=Ocean"
+          ]
+        },
+        "description": ""
+      }
+    },
+    {
+      "name": "Criar música",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/musicas",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "musicas"
+          ]
+        },
+        "description": "",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"album_id\": 1,\n  \"title\": \"Faixa de Teste\",\n  \"duration_seconds\": 180,\n  \"track_number\": 2\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Buscar prévia de música (iTunes)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/musicas/1/preview",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "musicas",
+            "1",
+            "preview"
+          ]
+        },
+        "description": "Consulta a prévia de áudio, capa e link oficial da iTunes para uma música."
+      }
+    },
+    {
+      "name": "Consultar música",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/musicas/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "musicas",
+            "1"
+          ]
+        },
+        "description": ""
+      }
+    },
+    {
+      "name": "Atualizar música",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/musicas/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "musicas",
+            "1"
+          ]
+        },
+        "description": "",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"album_id\": 1,\n  \"title\": \"Faixa Atualizada\",\n  \"duration_seconds\": 190,\n  \"track_number\": 2\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Excluir música",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/musicas/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "musicas",
+            "1"
+          ]
+        },
+        "description": ""
+      }
+    },
+    {
+      "name": "Listar playlists",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/playlists",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "playlists"
+          ]
+        },
+        "description": ""
+      }
+    },
+    {
+      "name": "Criar playlist",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/playlists",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "playlists"
+          ]
+        },
+        "description": "",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Minha playlist\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Consultar playlist",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/playlists/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "playlists",
+            "1"
+          ]
+        },
+        "description": ""
+      }
+    },
+    {
+      "name": "Atualizar playlist",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/playlists/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "playlists",
+            "1"
+          ]
+        },
+        "description": "",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Playlist Atualizada\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Adicionar música à playlist",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/playlists/1/musicas",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "playlists",
+            "1",
+            "musicas"
+          ]
+        },
+        "description": "",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"song_id\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Remover música da playlist",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/playlists/1/musicas/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "playlists",
+            "1",
+            "musicas",
+            "1"
+          ]
+        },
+        "description": ""
+      }
+    },
+    {
+      "name": "Excluir playlist (Soft Delete)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/playlists/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "playlists",
+            "1"
+          ]
+        },
+        "description": ""
+      }
+    }
+  ]
+}

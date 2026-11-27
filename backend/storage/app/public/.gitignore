@@ -1,0 +1,16 @@
+*
+!.gitignore
+!songs/
+!songs/ocean-eyes.mp3
+!songs/levitating.mp3
+!songs/planos.mp3
+!songs/blinding-lights.mp3
+!songs/viva-la-vida.mp3
+!songs/anti-hero.mp3
+!covers/
+!covers/ocean-eyes-cover.jpg
+!covers/levitating-cover.jpg
+!covers/planos-cover.jpg
+!covers/blinding-lights-cover.jpg
+!covers/viva-la-vida-cover.jpg
+!covers/anti-hero-cover.jpg
