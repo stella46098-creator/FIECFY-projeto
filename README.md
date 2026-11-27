@@ -141,4 +141,13 @@ Importe `docs/thunder-client/FIECFY-API-Collection.json` no Thunder Client ou Po
 
 A API está hospedada na Railway e pode ser testada em `https://fiecfy-projeto-production.up.railway.app/api`. O catálogo de demonstração já foi carregado. Ao publicar em uma base nova, configure as variáveis necessárias na plataforma e execute `php artisan migrate --force` e `php artisan db:seed --force` na pasta `backend`. Não use `migrate:fresh` em produção, pois ele apaga as tabelas existentes.
 
-Na Railway, `APP_KEY` e `SESSION_DRIVER=file` estão configuradas como variáveis privadas do serviço. Mantenha `APP_KEY`, credenciais de banco e demais segredos apenas nas variáveis privadas da plataforma. Não envie `.env`, `vendor/`, `node_modules/` ou `dist/` ao GitHub. O front-end ainda pode ser publicado separadamente na Vercel ou Netlify com `VITE_API_URL` apontando para a URL base acima.
+Na Railway, `APP_KEY` e `SESSION_DRIVER=file` estão configuradas como variáveis privadas do serviço. Mantenha `APP_KEY`, credenciais de banco e demais segredos apenas nas variáveis privadas da plataforma. Não envie `.env`, `vendor/`, `node_modules/` ou `dist/` ao GitHub.
+
+### Deploy do front-end na Vercel
+
+1. Importe o repositório `stella46098-creator/FIECFY-projeto` na Vercel.
+2. Defina `frontend` como **Root Directory**, `npm run build` como comando de build e `dist` como diretório de saída.
+3. Crie a variável de ambiente `VITE_API_URL` com o valor `https://fiecfy-projeto-production.up.railway.app/api`.
+4. Depois do primeiro deploy, copie o domínio público gerado pela Vercel e configure na Railway a variável `CORS_ALLOWED_ORIGINS` com esse domínio (inclua `https://`), para permitir que o site acesse a API.
+
+O arquivo `frontend/vercel.json` mantém as rotas do React funcionando ao atualizar ou abrir links internos diretamente. As pastas `node_modules/` e `dist/` estão ignoradas pelo Git.
