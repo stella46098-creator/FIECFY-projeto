@@ -6,9 +6,8 @@ Projeto acadêmico de streaming musical inspirado no Spotify, com API Laravel e 
 
 - Repositório: [stella46098-creator/FIECFY-projeto](https://github.com/stella46098-creator/FIECFY-projeto)
 - URL base da API: `https://fiecfy-projeto-production.up.railway.app/api`
-- Teste: `GET /artistas` retorna HTTP 200.
-
-O banco de produção ainda não foi preenchido com o catálogo de demonstração; as listagens retornam arrays vazios até a execução do seeder.
+- Testes: `GET /artistas`, `GET /albums` e `GET /musicas` retornam HTTP 200 e os seis registros de demonstração.
+- A página inicial (`/`) e a rota de teste (`/teste`) também retornam HTTP 200.
 
 ## Estrutura
 
@@ -140,6 +139,6 @@ Importe `docs/thunder-client/FIECFY-API-Collection.json` no Thunder Client ou Po
 
 ## 5. Publicação
 
-A API está hospedada na Railway e pode ser testada em `https://fiecfy-projeto-production.up.railway.app/api`. Para carregar os dados de demonstração em uma base de produção vazia, configure primeiro as variáveis necessárias na plataforma e execute `php artisan migrate --force` e `php artisan db:seed --force` na pasta `backend`. Não use `migrate:fresh` em produção, pois ele apaga as tabelas existentes.
+A API está hospedada na Railway e pode ser testada em `https://fiecfy-projeto-production.up.railway.app/api`. O catálogo de demonstração já foi carregado. Ao publicar em uma base nova, configure as variáveis necessárias na plataforma e execute `php artisan migrate --force` e `php artisan db:seed --force` na pasta `backend`. Não use `migrate:fresh` em produção, pois ele apaga as tabelas existentes.
 
-Mantenha `APP_KEY`, credenciais de banco e demais segredos apenas nas variáveis privadas da plataforma. Não envie `.env`, `vendor/`, `node_modules/` ou `dist/` ao GitHub. O front-end ainda pode ser publicado separadamente na Vercel ou Netlify com `VITE_API_URL` apontando para a URL base acima.
+Na Railway, `APP_KEY` e `SESSION_DRIVER=file` estão configuradas como variáveis privadas do serviço. Mantenha `APP_KEY`, credenciais de banco e demais segredos apenas nas variáveis privadas da plataforma. Não envie `.env`, `vendor/`, `node_modules/` ou `dist/` ao GitHub. O front-end ainda pode ser publicado separadamente na Vercel ou Netlify com `VITE_API_URL` apontando para a URL base acima.
