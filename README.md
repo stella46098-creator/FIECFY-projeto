@@ -147,7 +147,7 @@ Na Railway, `APP_KEY` e `SESSION_DRIVER=file` estão configuradas como variávei
 
 1. Importe o repositório `stella46098-creator/FIECFY-projeto` na Vercel.
 2. Defina `frontend` como **Root Directory**, `npm run build` como comando de build e `dist` como diretório de saída.
-3. Crie a variável de ambiente `VITE_API_URL` com o valor `https://fiecfy-projeto-production.up.railway.app/api`.
-4. Depois do primeiro deploy, copie o domínio público gerado pela Vercel e configure na Railway a variável `CORS_ALLOWED_ORIGINS` com esse domínio (inclua `https://`), para permitir que o site acesse a API.
+3. O `frontend/vercel.json` encaminha `/api/*` à API na Railway e mantém as rotas do React funcionando.
+4. Em produção, o front-end chama a API pela rota `/api` no próprio domínio; assim não é necessário configurar CORS na Railway. Para desenvolvimento local, mantenha `VITE_API_URL` apontando para `http://127.0.0.1:8000/api`.
 
-O arquivo `frontend/vercel.json` mantém as rotas do React funcionando ao atualizar ou abrir links internos diretamente. As pastas `node_modules/` e `dist/` estão ignoradas pelo Git.
+As pastas `node_modules/` e `dist/` estão ignoradas pelo Git.
