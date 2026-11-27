@@ -2,6 +2,14 @@
 
 Projeto acadêmico de streaming musical inspirado no Spotify, com API Laravel e interface React.
 
+## API em produção
+
+- Repositório: [stella46098-creator/FIECFY-projeto](https://github.com/stella46098-creator/FIECFY-projeto)
+- URL base da API: `https://fiecfy-projeto-production.up.railway.app/api`
+- Teste: `GET /artistas` retorna HTTP 200.
+
+O banco de produção ainda não foi preenchido com o catálogo de demonstração; as listagens retornam arrays vazios até a execução do seeder.
+
 ## Estrutura
 
 - `backend/`: API RESTful em PHP 8.2+ / Laravel 11 / MySQL.
@@ -128,17 +136,10 @@ As rotas de listagem usam paginação de 15 registros. Para pesquisar, use `?sea
 
 ## 4. Collection de testes
 
-Importe `docs/thunder-client/FIECFY-API-Collection.json` no Thunder Client ou Postman. Ajuste a variável `baseUrl` se necessário. Para rotas protegidas, faça login e copie o token retornado para a variável `token`.
+Importe `docs/thunder-client/FIECFY-API-Collection.json` no Thunder Client ou Postman. A variável `baseUrl` já aponta para a API em produção; para testes locais, altere-a para `http://127.0.0.1:8000/api`. Para rotas protegidas, use `Cadastro` para criar uma conta ou faça login e copie o token retornado para a variável `token`.
 
 ## 5. Publicação
 
-Antes do deploy:
-1. Configure um MySQL remoto e as variáveis de ambiente na plataforma.
-2. Configure `APP_ENV=production`, `APP_DEBUG=false` e `APP_URL` com a URL pública da API.
-3. Configure `CORS_ALLOWED_ORIGINS` com a URL pública do front-end.
-4. Configure as credenciais do Mailtrap.
-5. Execute `php artisan migrate --force` e `php artisan storage:link`.
-6. Publique o front-end na Vercel ou Netlify com `VITE_API_URL` apontando para a API pública.
-7. Não envie `.env`, `vendor/`, `node_modules/` ou `dist/` ao GitHub.
+A API está hospedada na Railway e pode ser testada em `https://fiecfy-projeto-production.up.railway.app/api`. Para carregar os dados de demonstração em uma base de produção vazia, configure primeiro as variáveis necessárias na plataforma e execute `php artisan migrate --force` e `php artisan db:seed --force` na pasta `backend`. Não use `migrate:fresh` em produção, pois ele apaga as tabelas existentes.
 
-O deploy ainda precisa ser realizado com as contas do aluno; este repositório contém a preparação e as instruções, não uma URL pública já hospedada.
+Mantenha `APP_KEY`, credenciais de banco e demais segredos apenas nas variáveis privadas da plataforma. Não envie `.env`, `vendor/`, `node_modules/` ou `dist/` ao GitHub. O front-end ainda pode ser publicado separadamente na Vercel ou Netlify com `VITE_API_URL` apontando para a URL base acima.
